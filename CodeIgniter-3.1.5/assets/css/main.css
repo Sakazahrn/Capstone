@@ -1,0 +1,106 @@
+body {
+	width: 100%;
+	height: 100%;
+	background: #2A3F54;
+}
+
+html {
+	height: 100%;
+	width: 100%;
+}
+
+.login-container, .register-container, .forgot-container {
+        width: 364px;
+		height: 325px;
+        background-color: #f9f9f9;
+
+        position:absolute; /*it can be fixed too*/
+        left:0; right:0;
+        top:0; bottom:0;
+        margin:auto;
+
+        /*this to solve "the content will not be cut when the window is smaller than the content": */
+        max-width:100%;
+        max-height:100%;
+        overflow:auto;
+		
+		border-radius: 10px;
+		opacity: 0.8;
+}
+
+.register-container {
+	height: 500px !important;
+}
+
+.forgot-container {
+	height: 380px !important;
+}
+
+.login-container hr, .register-container hr {
+	width: 80%;
+	border-color: black;
+}
+
+#email, #password, #name, #security_answer, #phone, select {
+	display: block;
+	margin: 0 auto;
+	width: 80%;
+	height: 30px;
+	background-color: #f9f9f9;
+	border: 1px solid gray;
+	border-radius: 2px;
+	padding-left: 5px;
+}
+
+#email:focus, #password:focus, #name:focus, #phone:focus, #security_answer:focus {
+	border: 0;
+	outline: 0;
+	background: transparent;
+	border-bottom: 2px solid #209e91;
+	border-radius: 2px;
+}
+
+#submit {
+	display: block;
+	margin: 0 auto;
+	height: 35px;
+	width: 60%;
+	background-color: #209e91;
+	color: white;
+	border: none;
+	border-radius: 2px;
+}
+
+a, a:hover, a:focus {
+	text-decoration: none;
+	color: #4CAF50 !important;
+}
+
+#error {
+	text-align: center;
+	color: red;
+	padding-top: 5px;
+}
+
+#taken {
+	text-align: center;
+	color: red;
+	margin-top: -10px;
+	padding-bottom: 5px;
+}
+
+#success {
+	text-align: center;
+	color: blue;
+	padding-top: 5px;
+}
+
+div#back {
+	padding-top: 10px;
+	text-align: center;
+}
+
+#register, #forgot, #back {
+	text-align: center;
+	padding-top: 10px;
+}
