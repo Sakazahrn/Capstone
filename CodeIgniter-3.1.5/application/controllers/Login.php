@@ -11,32 +11,25 @@ class Login extends CI_Controller {
 	{
 		$this->load->database();
 		
-		$data['error'] = "Invalid Email/Password";
+		$email = $this->input->post("email");
+		$password = $this->input->post("password");
 		
-		if ($this->form_validation->run() == FALSE)
+		$emailLower = strtolower($email);
+		
+		$CI =& get_instance();
+		$sql = "select * from cap_Student";
+		$query = $CI->db->query($sql);
+		$this->TPL['results'] = $query->result_array();
+		
+		if ($email == $this->TPL['results'][0]['email'] && $password == $this->TPL['results'][0]['password'])
 		{
-			$this->load->view('login');
+			redirect(base_url() . 'index.php/Calendar');
 		}
 		else
 		{
-			$email = $this->input->post("email");
-			$password = $this->input->post("password");
+			$_SESSION['error'] = "Invalid Email/Password";
 			
-			$emailLower = strtolower($email);
-			
-			$CI =& get_instance();
-			$sql = "select * from cap_Student";
-			$query = $CI->db->query($sql);
-			$this->TPL['results'] = $query->result_array();
-			
-			if ($email == $this->TPL['results'][0]['email'] && $password == $this->TPL['results'][0]['password'])
-			{
-				redirect(base_url() . 'index.php/Calendar');
-			}
-			else
-			{
-				$this->load->view('login', $data);
-			}	
-		}
+			redirect(base_url() . "index.php/Login");
+		}	
 	}
 }

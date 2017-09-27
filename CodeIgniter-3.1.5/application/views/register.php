@@ -22,10 +22,11 @@
 		<br/>
 		<div id = "taken">
 		<?php 
-		if (isset($error)) 
+		if (isset($_SESSION['error'])) 
 		{ 
-			echo $error; 
+			echo $_SESSION['error']; 
 		} 
+		unset($_SESSION['error']);
 		?>
 		</div>
 		<input type = "password" id = "password" placeholder = "Password" name = "password" required = "true"/>
@@ -51,14 +52,22 @@
 	</form>
 </div>
 
-	<!-- jQuery -->
-    <script src="<?=asset_url();?>vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="<?=asset_url();?>vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="<?=asset_url();?>vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="<?=asset_url();?>vendors/nprogress/nprogress.js"></script>
-		
+<!-- jQuery -->
+<script src="<?=asset_url();?>vendors/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="<?=asset_url();?>vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="<?=asset_url();?>vendors/fastclick/lib/fastclick.js"></script>
+<!-- NProgress -->
+<script src="<?=asset_url();?>vendors/nprogress/nprogress.js"></script>
+<!-- Input Mask -->
+<script src="<?=asset_url();?>vendors/Inputmask/Inputmask/dist/inputmask/inputmask.js"></script>
+	
+<script>
+var selector = document.getElementById("phone");
+
+var im = new Inputmask("999-999-9999");
+im.mask(selector);
+</script>
 </body>
 </html>

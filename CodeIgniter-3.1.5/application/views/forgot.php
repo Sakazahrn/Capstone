@@ -15,19 +15,19 @@
 	
 	<hr/>
 	
-	<form id =  "forgot-form">
-		<input type = "email" id = "email" placeholder = "Email" required = "required"/>
+	<form id =  "forgot-form" method = "POST" action = "Forgot/getPassword">
+		<input type = "email" id = "email" name = "email" placeholder = "Email" required = "required"/>
 		<br>
 		<select name = "security_questions" required = "required">
 			<option value = "book">What Is your favorite book?</option>
-			<option value = "hero">Who was your childhood hero? </option>
+			<option value = "hero">Who was your childhood hero?</option>
 			<option value = "nickname">What was your childhood nickname?</option>
 			<option value = "vacation">Where is your favorite place to vacation?</option>
 			<option value = "school">What was the name of your elementary / primary school?</option>
 			<option value = "growup">When you were young, what did you want to be when you grew up?</option>
 		</select>
 		<br>
-		<input type = "text" id = "security_answer" placeholder = "Security Answer" required = "required" />
+		<input type = "text" id = "security_answer" name = "security_answer" placeholder = "Security Answer" required = "required" />
 		<br>
 		<input type = "submit" id = "submit" value = "Reset Password"></submit>
 		
@@ -37,6 +37,28 @@
 		
 		<div id = "back">
 			<a href = "<?=base_URL();?>index.php/Login">Back</a>
+		</div>
+		
+		<div id = "forgotPass">
+		
+		<?php 
+		if (isset($_SESSION['password'])) 
+		{ 
+		?>
+		Success! Your password is '<?php echo $_SESSION['password'] ?>'
+		<?php } 
+		unset($_SESSION['password']);
+		?>
+		</div>
+		
+		<div id = "errorPass">
+		<?php
+		if (isset($_SESSION['incorrect']))
+		{
+			echo $_SESSION['incorrect'];
+		}
+		unset($_SESSION['incorrect']);
+		?>
 		</div>
 	</form>
 </div>

@@ -33,10 +33,10 @@ html {
 }
 
 .forgot-container {
-	height: 380px !important;
+	height: 385px !important;
 }
 
-.login-container hr, .register-container hr {
+hr {
 	width: 80%;
 	border-color: black;
 }
@@ -76,7 +76,7 @@ a, a:hover, a:focus {
 	color: #4CAF50 !important;
 }
 
-#error {
+#error, #errorPass {
 	text-align: center;
 	color: red;
 	padding-top: 5px;
@@ -86,16 +86,16 @@ a, a:hover, a:focus {
 	text-align: center;
 	color: red;
 	margin-top: -10px;
-	padding-bottom: 5px;
+	padding-bottom: 8px;
 }
 
-#success {
+#success, #forgotPass {
 	text-align: center;
 	color: blue;
 	padding-top: 5px;
 }
 
-div#back {
+#back {
 	padding-top: 10px;
 	text-align: center;
 }

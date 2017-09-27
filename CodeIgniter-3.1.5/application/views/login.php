@@ -30,21 +30,23 @@
 			<a href = "<?=base_URL();?>index.php/Forgot">Forgot Password</a>
 		</div>
 		
-		<div id = "taken">
+		<div id = "error">
 		<?php 
-		if (isset($error)) 
+		if (isset($_SESSION['error'])) 
 		{ 
-			echo $error; 
+			echo $_SESSION['error'];
 		} 
+		unset($_SESSION['error']);
 		?>
 		</div>
 		
 		<div id = "success">
 		<?php 
-		if (isset($msg)) 
+		if (isset($_SESSION['msg'])) 
 		{ 
-			echo $msg; 
+			echo $_SESSION['msg']; 
 		} 
+		unset($_SESSION['msg']);
 		?>
 		</div>
 	</form>

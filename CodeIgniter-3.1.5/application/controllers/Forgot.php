@@ -16,9 +16,6 @@ class Forgot extends CI_Controller {
 		$answer = $this->input->post("security_answer");
 		
 		$query = $this->db->query("SELECT * FROM cap_Student WHERE email = '$emailLower' AND security_question = '$question' AND security_answer = '$answer'");
-		$emailCheck = $this->db->query("SELECT email FROM cap_Student WHERE email = '$emailLower'");
-		$questionCheck = $this->db->query("SELECT security_question FROM cap_Student WHERE email = '$emailLower'");
-		$answerCheck = $this->db->query("SELECT security_answer FROM cap_Student WHERE email = '$emailLower'");
 
 		// For debugging purposes
 		
@@ -46,24 +43,14 @@ class Forgot extends CI_Controller {
 			$passwordQuery = $this->db->query("SELECT password FROM cap_Student WHERE email = '$emailLower'");
 			$TPL['password'] = $passwordQuery->result_array();
 			
-			$data['password'] = $TPL['password'][0]['password'];
-			echo $data['password'];
-			
-			$this->load->view("forgot", $data);
+			$_SESSION['password'] = $TPL['password'][0]['password'];
+
+			redirect(base_url() . "index.php/Forgot");
 		}
-		else if ($emailCheck <= 0)
+		else
 		{
-			// Failure
-			$data['incorrect'] += "Incorrect Email.";
-			$this->load->view("forgot", $data);
-		}
-		else if ($questionCheck <= 0)
-		{
-			$data['incorrect'] += "Incorrect Question.";
-		}
-		else if ($answerCheck <= 0)
-		{
-			$data['incorrect'] += "Incorrect Answer.";
+			$_SESSION['incorrect'] = "Incorrect information. Please try again.";
+			redirect(base_url() . "index.php/Forgot");
 		}
 	}
 }
