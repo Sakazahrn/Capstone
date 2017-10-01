@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentelella Alela! | </title>
+    <title>Calendar</title>
 
     <!-- Bootstrap -->
     <link href="<?=asset_url();?>vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -39,7 +39,9 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <h2>
+                	<?=$name = (isset($_SESSION['login_user']) ? $_SESSION['login_user'] : null); echo $name; ?>
+         		</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -79,7 +81,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="<?asset_url();?>images/img.jpg" alt="">John Doe
+                    <img src="<?asset_url();?>images/img.jpg" alt=""><?=$name = (isset($_SESSION['login_user']) ? $_SESSION['login_user'] : null); echo $name; ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -91,7 +93,7 @@
                       </a>
                     </li>
                     <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="<?=base_url();?>index.php/Calendar/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
               </ul>

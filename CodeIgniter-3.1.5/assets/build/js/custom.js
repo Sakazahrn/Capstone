@@ -145,83 +145,84 @@ $MENU_TOGGLE.on('click', function() {
 };
 
 // /Sidebar
-	   	/* CALENDAR */
-		  
-		    function  init_calendar() {
-					
-				if( typeof ($.fn.fullCalendar) === 'undefined'){ return; }
-				console.log('init_calendar');
-					
-				var date = new Date(),
-					d = date.getDate(),
-					m = date.getMonth(),
-					y = date.getFullYear(),
-					started,
-					categoryClass;
+/* CALENDAR */
 
-				var calendar = $('#calendar').fullCalendar({
-				  header: {
-					left: 'prev,next today',
-					center: 'title',
-					right: 'month,agendaWeek,agendaDay'
-				  },
-				  selectable: true,
-				  selectHelper: true,
-				  aspectRatio: 2.25,
-				  select: function(start, end, allDay) {
-					$('#fc_create').click();
+function  init_calendar() {
+		
+	if( typeof ($.fn.fullCalendar) === 'undefined'){ return; }
+	console.log('init_calendar');
+		
+	var date = new Date(),
+		d = date.getDate(),
+		m = date.getMonth(),
+		y = date.getFullYear(),
+		started,
+		categoryClass;
 
-					started = start;
-					ended = end;
+	
+	var calendar = $('#calendar').fullCalendar({
+	  header: {
+		left: 'prev,next today',
+		center: 'title',
+		right: 'month,agendaWeek,agendaDay'
+	  },
+	  selectable: true,
+	  selectHelper: true,
+	  aspectRatio: 2.25,
+	  select: function(start, end, allDay) {
+		$('#fc_create').click();
 
-					$(".antosubmit").on("click", function() {
-					  var title = $("#title").val();
-					  if (end) {
-						ended = end;
-					  }
+		started = start;
+		ended = end;
 
-					  categoryClass = $("#event_type").val();
+		$(".antosubmit").on("click", function() {
+		  var title = '$("#title").val()';
+		  if (end) {
+			ended = end;
+		  }
 
-					  if (title) {
-						calendar.fullCalendar('renderEvent', {
-							title: title,
-							start: started,
-							end: end,
-							allDay: allDay
-						  },
-						  true // make the event "stick"
-						);
-					  }
+		  categoryClass = $("#event_type").val();
 
-					  $('#title').val('');
+		  if (title) {
+			calendar.fullCalendar('renderEvent', {
+				title: title,
+				start: started,
+				end: end,
+				allDay: allDay
+			  },
+			  true // make the event "stick"
+			);
+		  }
 
-					  calendar.fullCalendar('unselect');
+		  $('#title').val('');
 
-					  $('.antoclose').click();
+		  calendar.fullCalendar('unselect');
 
-					  return false;
-					});
-				  },
-				  eventClick: function(calEvent, jsEvent, view) {
-					$('#fc_edit').click();
-					$('#title2').val(calEvent.title);
+		  $('.antoclose').click();
 
-					categoryClass = $("#event_type").val();
+		  return false;
+		});
+	  },
+	  eventClick: function(calEvent, jsEvent, view) {
+		$('#fc_edit').click();
+		$('#title2').val(calEvent.title);
 
-					$(".antosubmit2").on("click", function() {
-					  calEvent.title = $("#title2").val();
+		categoryClass = $("#event_type").val();
 
-					  calendar.fullCalendar('updateEvent', calEvent);
-					  $('.antoclose2').click();
-					});
+		$(".antosubmit2").on("click", function() {
+		  calEvent.title = $("#title2").val();
 
-					calendar.fullCalendar('unselect');
-				  },
-				  editable: true,
-				  events: []
-				});
-				
-			};
+		  calendar.fullCalendar('updateEvent', calEvent);
+		  $('.antoclose2').click();
+		});
+
+		calendar.fullCalendar('unselect');
+	  },
+	  editable: true,
+	  events: []
+	});
+	
+};
 	   
 	   
 	$(document).ready(function() {

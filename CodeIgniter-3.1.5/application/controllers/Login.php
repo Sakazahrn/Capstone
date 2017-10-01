@@ -12,17 +12,19 @@ class Login extends CI_Controller {
 		$this->load->database();
 		
 		$email = $this->input->post("email");
-		$password = $this->input->post("password");
-		
+		$password = $this->input->post("password");	
 		$emailLower = strtolower($email);
 		
-		$CI =& get_instance();
-		$sql = "select * from cap_Student";
-		$query = $CI->db->query($sql);
+		$query = $this->db->query("SELECT * FROM cap_Student WHERE email = '$emailLower' && password = '$password'");
 		$this->TPL['results'] = $query->result_array();
+
+		// Get User's name
+		$nameQuery = $this->db->query("SELECT name FROM cap_Student WHERE email = '$emailLower'");
+		$this->TPL['name'] = $nameQuery->result_array();
 		
-		if ($email == $this->TPL['results'][0]['email'] && $password == $this->TPL['results'][0]['password'])
+		if ($query->num_rows() > 0)
 		{
+			$_SESSION['login_user'] = $this->TPL['name'][0]['name'];
 			redirect(base_url() . 'index.php/Calendar');
 		}
 		else

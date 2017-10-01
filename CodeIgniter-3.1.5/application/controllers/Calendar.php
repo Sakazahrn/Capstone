@@ -6,4 +6,10 @@ class Calendar extends CI_Controller {
 	{
 		$this->load->view('calendar');
 	}
+
+	public function logout() 
+	{
+		unset($_SESSION['login_user']);
+		redirect(base_url() . "index.php/Login");
+	}
 }
