@@ -145,6 +145,7 @@ $MENU_TOGGLE.on('click', function() {
 };
 
 // /Sidebar
+//Test
 /* CALENDAR */
 
 function  init_calendar() {
@@ -159,7 +160,7 @@ function  init_calendar() {
 		started,
 		categoryClass;
 
-	
+
 	var calendar = $('#calendar').fullCalendar({
 	  header: {
 		left: 'prev,next today',
