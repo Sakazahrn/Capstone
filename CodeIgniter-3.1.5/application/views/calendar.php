@@ -11,6 +11,8 @@
 
     <!-- Bootstrap -->
     <link href="<?=asset_url();?>vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Datepicker -->
+    <link href="<?=asset_url();?>vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="<?=asset_url();?>vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- FullCalendar -->
@@ -161,79 +163,112 @@
       </div>
     </div>
 
-    <!-- calendar modal -->
-    <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title" id="myModalLabel">New Calendar Entry</h4>
-          </div>
-          <div class="modal-body">
-            <div id="testmodal" style="padding: 5px 20px;">
-              <form id="antoform" class="form-horizontal calender" role="form">
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Title</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="title" name="title">
-                  </div>
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add Calendar Event</h4>
+      </div>
+      <div class="modal-body">
+      <?php echo form_open(base_url() . 'index.php/Calendar/add_event', array("class" => "form-horizontal")) ?>
+      <div class="form-group">
+                <label for="p-in" class="col-md-4 label-heading">Event Name</label>
+                <div class="col-md-8 ui-front">
+                    <input type="text" class="form-control" name="name" value="" id = "name">
                 </div>
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Description</label>
-                  <div class="col-sm-9">
-                    <textarea class="form-control" style="height:55px;" id="descr" name="descr"></textarea>
-                  </div>
+        </div>
+        <div class="form-group">
+                <label for="p-in" class="col-md-4 label-heading">Description</label>
+                <div class="col-md-8 ui-front">
+                    <input type="text" class="form-control" name="description" id = "description">
                 </div>
-              </form>
+        </div>
+        <div class="form-group">
+                <label for="p-in" class="col-md-4 label-heading">Start Date</label>
+                <div class='input-group date' id='datetimepicker6'>
+                <input data-date-format="YYYY-MM-DD HH:mm" type='text' class="form-control" name = "start_date" id = "start_date"/>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary antosubmit">Save changes</button>
-          </div>
+        </div>
+        <div class="form-group">
+                <label for="p-in" class="col-md-4 label-heading">End Date</label>
+                <div class='input-group date' id='datetimepicker7'>
+                <input data-date-format="YYYY-MM-DD HH:mm" type='text' class="form-control" name = "end_date" id = "end_date"/>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
         </div>
       </div>
-    </div>
-    <div id="CalenderModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title" id="myModalLabel2">Edit Calendar Entry</h4>
-          </div>
-          <div class="modal-body">
-
-            <div id="testmodal2" style="padding: 5px 20px;">
-              <form id="antoform2" class="form-horizontal calender" role="form">
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Title</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="title2" name="title2">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Description</label>
-                  <div class="col-sm-9">
-                    <textarea class="form-control" style="height:55px;" id="descr2" name="descr"></textarea>
-                  </div>
-                </div>
-
-              </form>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default antoclose2" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary antosubmit2">Save changes</button>
-          </div>
-        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-primary" value="Add Event">
+        <?php echo form_close() ?>
       </div>
     </div>
+  </div>
+</div>
 
-    <div id="fc_create" data-toggle="modal" data-target="#CalenderModalNew"></div>
-    <div id="fc_edit" data-toggle="modal" data-target="#CalenderModalEdit"></div>
-    <!-- /calendar modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Update Calendar Event</h4>
+      </div>
+      <div class="modal-body">
+      <?php echo form_open(base_url() . 'index.php/Calendar/edit_event', array("class" => "form-horizontal")) ?>
+      <div class="form-group">
+                <label for="p-in" class="col-md-4 label-heading">Event Name</label>
+                <div class="col-md-8 ui-front">
+                    <input type="text" class="form-control" name="name" value="" id="name">
+                </div>
+        </div>
+        <div class="form-group">
+                <label for="p-in" class="col-md-4 label-heading">Description</label>
+                <div class="col-md-8 ui-front">
+                    <input type="text" class="form-control" name="description" id="description">
+                </div>
+        </div>
+        <div class="form-group">
+                <label for="p-in" class="col-md-4 label-heading">Start Date</label>
+                <div class='input-group date' id='datetimepicker8'>
+                <input data-date-format="YYYY-MM-DD HH:mm" type='text' class="form-control" name = "start_date" id = "start_date"/>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+                <label for="p-in" class="col-md-4 label-heading">End Date</label>
+                <div class='input-group date' id='datetimepicker9'>
+                <input data-date-format="YYYY-MM-DD HH:mm" type='text' class="form-control" name = "end_date" id = "end_date"/>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+                    <label for="p-in" class="col-md-4 label-heading">Delete Event</label>
+                    <div class="col-md-8">
+                        <input type="checkbox" name="delete" value="1">
+                    </div>
+            </div>
+            <input type="hidden" name="eventid" id="event_id" value="0" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-primary" value="Update Event">
+        <?php echo form_close() ?>
+      </div>
+    </div>
+  </div>
+</div>
+
+
         
     <!-- jQuery -->
     <script src="<?=asset_url();?>vendors/jquery/dist/jquery.min.js"></script>
@@ -246,9 +281,41 @@
     <!-- FullCalendar -->
     <script src="<?=asset_url();?>vendors/moment/min/moment.min.js"></script>
     <script src="<?=asset_url();?>vendors/fullcalendar/dist/fullcalendar.js"></script>
+    <!-- Transition -->
+	<script src="<?=asset_url();?>vendors/bootstrap/js/transition.js"></script>
+	<!-- Collapse -->
+	<script src="<?=asset_url();?>vendors/bootstrap/js/collapse.js"></script>
+	<!-- Datetime Picker -->
+	<script src="<?=asset_url();?>vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="<?=asset_url();?>build/js/custom.js"></script>
+	
 
+	<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker6').datetimepicker();
+        $('#datetimepicker7').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+
+     $('#datetimepicker8').datetimepicker();
+        $('#datetimepicker9').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#datetimepicker8").on("dp.change", function (e) {
+            $('#datetimepicker9').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker9").on("dp.change", function (e) {
+            $('#datetimepicker8').data("DateTimePicker").maxDate(e.date);
+        });
+</script>
   </body>
 </html>
