@@ -44,7 +44,7 @@ class Register extends CI_Controller {
 			else
 			{
 				// Success
-				$query = $this->db->query("INSERT INTO cap_Student VALUES (NULL, '$name', '$emailLower', '$password', '$question', '$answerLower', '$phone', '$today')");
+				$query = $this->db->query("INSERT INTO cap_Student VALUES (NULL, '$name', '$emailLower', '$password', '$question', '$answerLower', '$phone',  '$today', '0')");
 				$_SESSION['msg'] = "Registered Successfully! You may now login.";
 				redirect(base_url() . "index.php/Login");
 			}	

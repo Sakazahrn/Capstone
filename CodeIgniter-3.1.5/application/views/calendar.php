@@ -60,9 +60,9 @@
 				  
                   <li><a><i class="fa fa-cog"></i> Settings <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu">
-                      <li><a href="<?base_URL();?>index.php/Rooms">Rooms</a></li>
-                      <li><a href="<?base_URL();?>index.php/Reports">Reports</a></li>
-                      <li><a href="<?base_URL();?>index.php/Student_Management">Student Management</a></li>
+                      <li><a href="<?base_URL();?>Rooms">Rooms</a></li>
+                      <li><a href="<?base_URL();?>Reports">Reports</a></li>
+                      <li><a href="<?base_URL();?>Student_Management">Student Management</a></li>
                     </ul>
 				  </li>
                 </ul>

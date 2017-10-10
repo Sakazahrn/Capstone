@@ -6,4 +6,9 @@ class Rooms extends CI_Controller {
 	{
 		$this->load->view('rooms');
 	}
+
+	public function addRoom()
+	{
+		
+	}
 }

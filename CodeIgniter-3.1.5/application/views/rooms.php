@@ -38,7 +38,7 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <h2><?=$name = (isset($_SESSION['login_user']) ? $_SESSION['login_user'] : null);?></h2>
               </div>
               <div class="clearfix"></div>
             </div>
@@ -80,7 +80,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="images/img.jpg" alt=""><?=$name = (isset($_SESSION['login_user']) ? $_SESSION['login_user'] : null); ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -92,7 +92,7 @@
                       </a>
                     </li>
                     <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="login.html"><i class="faa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
               </ul>
@@ -115,7 +115,7 @@
                   <div class="x_title">
                     <h2>Rooms</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a><i class="fa fa-plus"></i></a>
+                      <li><a data-toggle="modal" href="#addModal"><i class="fa fa-plus"></i></a>
                       </li>
                       <li class="dropdown">
                         <a href="#" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
@@ -135,6 +135,67 @@
         <!-- /page content -->
       </div>
     </div>
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add Calendar Event</h4>
+      </div>
+      <div class="modal-body">
+      <?php echo form_open(base_url() . 'index.php/Calendar/add_event', array("class" => "form-horizontal")) ?>
+      <fieldset>
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="textinput">Room</label>
+            <div class="col-sm-10">
+              <input type="text" placeholder="Room Name" class="form-control" name = "room" id = "room">
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="textinput">Capacity</label>
+            <div class="col-sm-10">
+              <input type="number" placeholder="Capacity" class="form-control" id = "capacity" name = "capacity">
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="textinput">Start Date</label>
+            <div class="col-sm-10">
+              <div class='input-group date' id='datetimepicker6'>
+                <input data-date-format="YYYY-MM-DD" type='text' class="form-control" name = "start_date" id = "start_date"/>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="textinput">Start Date</label>
+            <div class="col-sm-10">
+              <div class='input-group date' id='datetimepicker7'>
+                <input data-date-format="YYYY-MM-DD" type='text' class="form-control" name = "end_date" id = "end_date"/>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-primary" value="Add Event">
+        <?php echo form_close() ?>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- jQuery -->
     <script src="<?=asset_url();?>vendors/jquery/dist/jquery.min.js"></script>

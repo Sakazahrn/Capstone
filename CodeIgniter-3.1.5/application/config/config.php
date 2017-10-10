@@ -35,7 +35,7 @@ $config['base_url'] = 'https://csunix.mohawkcollege.ca/~000352627/private/Capsto
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'calendar.php';
+$config['index_page'] = 'login.php';
 
 /*
 |--------------------------------------------------------------------------
